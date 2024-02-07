@@ -109,6 +109,7 @@ public class Menu {
         System.out.println("2) Вывести 5 магазинов, где товар дешевле всего");
         System.out.println("3) Вывести все магазины, где есть товар");
         System.out.println("4) Узнать информацию о конкретном товаре");
+        System.out.println("5) Вывести все товары, которые есть в магазине (Разрабатывается)");
         System.out.println("5) Выйти из программы");
         choicetodo = readChoice();
     }

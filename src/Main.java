@@ -21,12 +21,10 @@ public class Main {
         Clothes[] clotheses = new Clothes[0];
         Technic[] technics = new Technic[0];
         if (Txt.nullFileOrNotNull()){
-            foods = Txt.readFoodFromFile();
-            milks = Txt.readMilkFromFile();
-            clotheses = Txt.readClothesFromFile();
-            technics = Txt.readTechnicFromFile();
+            products = Txt.readProductsFromFile();
             System.out.println("Данные успешно загружены");
         }
+        System.out.println(products.get(0).getName() + " " + products.get(products.size() - 1).getName());
         //NullPointerException
         // Массив для хранения соответствия между значением и качеством
         String[] strings = new String[3];
@@ -88,7 +86,7 @@ public class Main {
                                 endDate.set(Calendar.YEAR, endYear);
                                 endDate.set(Calendar.MONTH, (endMonth - 1));
                                 endDate.set(Calendar.DATE, endDay);
-                                food = new Food(name, date, price, address, endDate, quality);
+                                food = new Food(name, date, price, address, quality, endDate);
                                 Txt.writeFoodToFile(food);
                                 flag = true;
                             }else {
@@ -135,7 +133,7 @@ public class Main {
                                 endDate.set(Calendar.YEAR, (endYear - 1));
                                 endDate.set(Calendar.MONTH, (endMonth - 1));
                                 endDate.set(Calendar.DATE, endDay);
-                                milk = new Milk(name, date, price, address, endDate, quality, fatContent);
+                                milk = new Milk(name, date, price, address, quality, endDate, fatContent);
                                 Txt.writeMilkToFile(milk, true);
                                 flag = true;
                             }else {
