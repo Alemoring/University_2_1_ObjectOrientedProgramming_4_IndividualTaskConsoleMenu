@@ -9,28 +9,74 @@ public class Menu {
     static private Scanner scanner = new Scanner(System.in);
     static private int choicetodo = -1;
     static private int choiceid = -1;
-    public static int readChoice(){
+    public static int readValue(int readedId){
+        // readedID = 1 - readValue, 2 - readChoice, 3 - readYesOrNot, 4 - readID, 5 - readYear, 6 - readMonth, 7 - readDay
         scanner = new Scanner(System.in);
         int readed = -1;
         try {
-            readed = Integer.parseInt(scanner.nextLine());
+            if (readedId == 1){
+                readed = Integer.parseInt(scanner.nextLine());
+            } else if (readedId == 2){
+                readed = Integer.parseInt(scanner.nextLine());
+                if(readed != 1 && readed != 2 && readed != 3 && readed != 4 && readed != 5 && readed != 6){
+                    readed = readValue(2);
+                }
+            } else if (readedId == 3) {
+                readed = Integer.parseInt(scanner.nextLine());
+                if(readed != 1 && readed != 2){
+                    readed = readValue(3);
+                }
+            } else if (readedId == 4){
+                readed = Integer.parseInt(scanner.nextLine());
+                if(readed > 4 || readed < 1){
+                    readed = readValue(4);
+                }
+            } else if (readedId == 5) {
+                readed = Integer.parseInt(scanner.nextLine());
+                if(readed < 2000 || readed > 3000){
+                    readed = readValue(5);
+                }
+            } else if (readedId == 6) {
+                readed = Integer.parseInt(scanner.nextLine());
+                if(readed < 1 || readed > 12){
+                    readed = readValue(6);
+                }
+            } else if (readedId == 7) {
+                readed = Integer.parseInt(scanner.nextLine());
+                if(readed < 1 || readed > 31){
+                    readed = readValue(7);
+                }
+            }
         }
         catch (NumberFormatException e){
-            System.out.println("Пожалуйстаа вводите только существующие пункты меню ;)");
-            readed = readChoice();
-        }
-        return readed;
-    }
-    public static int readValue(){
-        scanner = new Scanner(System.in);
-        int readed = -1;
-        try {
-            readed = Integer.parseInt(scanner.nextLine());
-        }
-        catch (NumberFormatException e){
-            System.out.println("Введено неверное значение :(");
-            System.out.print("Попробуйте снова, у вас всё получится: ");
-            readed = readValue();
+            if (readedId == 1){
+                System.out.println("Введено неверное значение :(");
+                System.out.print("Попробуйте снова, у вас всё получится: ");
+                readed = readValue(1);
+            } else if (readedId == 2){
+                System.out.println("Пожалуйста вводите только существующие пункты меню ;)");
+                readed = readValue(2);
+            } else if (readedId == 3) {
+                System.out.println("Введено неверное значение :(");
+                System.out.print("Попробуйте снова, у вас всё получится: ");
+                readed = readValue(3);
+            } else if (readedId == 4){
+                System.out.println("Введено неверное значение :(");
+                System.out.print("Попробуйте снова, у вас всё получится: ");
+                readed = readValue(4);
+            } else if (readedId == 5) {
+                System.out.println("Введено неверное значение :(");
+                System.out.print("Попробуйте снова, у вас всё получится: ");
+                readed = readValue(5);
+            }else if (readedId == 6) {
+                System.out.println("Введено неверное значение :(");
+                System.out.print("Попробуйте снова, у вас всё получится: ");
+                readed = readValue(6);
+            }else {
+                System.out.println("Введено неверное значение :(");
+                System.out.print("Попробуйте снова, у вас всё получится: ");
+                readed = readValue(7);
+            }
         }
         return readed;
     }
@@ -44,22 +90,6 @@ public class Menu {
             System.out.println("Введено неверное значение :(");
             System.out.print("Попробуйте снова, у вас всё получится: ");
             readed = readDoubleValue();
-        }
-        return readed;
-    }
-    public static int readYesOrNot(){
-        scanner = new Scanner(System.in);
-        int readed = -1;
-        try {
-            readed = Integer.parseInt(scanner.nextLine());
-            if(readed != 1 && readed != 2){
-                readed = readYesOrNot();
-            }
-        }
-        catch (NumberFormatException e){
-            System.out.println("Введено неверное значение :(");
-            System.out.print("Попробуйте снова, у вас всё получится: ");
-            readed = readYesOrNot();
         }
         return readed;
     }
@@ -85,22 +115,20 @@ public class Menu {
         }
         return name;
     }
-    public static int readId(){
-        scanner = new Scanner(System.in);
-        int readed = -1;
-        try {
-            readed = Integer.parseInt(scanner.nextLine());
-            if(readed > 4 || readed < 1){
-                readed = readValue();
-            }
-        }
-        catch (NumberFormatException e){
-            System.out.println("Введено неверное значение :(");
-            System.out.print("Попробуйте снова, у вас всё получится: ");
-            readed = readValue();
-        }
-        return readed;
+    public static Calendar setDate(){
+        Calendar date = Calendar.getInstance();
+        System.out.print("Введите год покупки: ");
+        int year = Menu.readValue(5);
+        System.out.print("Введите месяц покупки: ");
+        int month = Menu.readValue(6);
+        System.out.print("Введите день покупки: ");
+        int day = Menu.readValue(7);
+        date.set(Calendar.YEAR, year);
+        date.set(Calendar.MONTH, (month - 1));
+        date.set(Calendar.DATE, day);
+        return date;
     }
+
 
      public static void start() {
         System.out.println("Приветствую!");
@@ -111,7 +139,7 @@ public class Menu {
         System.out.println("4) Узнать информацию о конкретном товаре");
         System.out.println("5) Вывести все товары, которые есть в магазине (Разрабатывается)");
         System.out.println("5) Выйти из программы");
-        choicetodo = readChoice();
+        choicetodo = readValue(2);
     }
 
      public static void chooseFindCharacteristics(Food[] foods, Clothes[] clotheses, Technic[] technics, Milk[] milks) throws IOException { // Если выбрали 4 пункт в начале
@@ -122,7 +150,7 @@ public class Menu {
             System.out.println("2) Одежда");
             System.out.println("3) Техника");
             System.out.println("4) Молоко");
-            choiceid = Menu.readId();
+            choiceid = Menu.readValue(4);
             String findName;
             switch (choiceid){
                 case 1: // Еда

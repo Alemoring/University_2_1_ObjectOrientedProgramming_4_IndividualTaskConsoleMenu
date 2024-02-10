@@ -24,7 +24,6 @@ public class Main {
             products = Txt.readProductsFromFile();
             System.out.println("Данные успешно загружены");
         }
-        System.out.println(products.get(0).getName() + " " + products.get(products.size() - 1).getName());
         //NullPointerException
         // Массив для хранения соответствия между значением и качеством
         String[] strings = new String[3];
@@ -41,23 +40,14 @@ public class Main {
                     System.out.println("3) Техника");
                     System.out.println("4) Молоко");
                     int id;
-                    id = Menu.readId();
+                    id = Menu.readValue(4);
                     Food food;
                     Milk milk;
                     Clothes clothes;
                     Technic technic;
                     System.out.print("Введите название товара: ");
                     String name = Menu.readLine();
-                    Calendar date = Calendar.getInstance();
-                    System.out.print("Введите год покупки: ");
-                    int year = Menu.readValue();
-                    System.out.print("Введите месяц покупки: ");
-                    int month = Menu.readValue();
-                    System.out.print("Введите день покупки: ");
-                    int day = Menu.readValue();
-                    date.set(Calendar.YEAR, year);
-                    date.set(Calendar.MONTH, (month - 1));
-                    date.set(Calendar.DATE, day);
+                    Calendar date = Menu.setDate();
                     System.out.print("Введите цену покупки: ");
                     double price = Menu.readDoubleValue();
                     System.out.print("Введите адрес и название магазина, где был куплен товар: ");
@@ -66,7 +56,7 @@ public class Main {
                     System.out.println("1) Хорошо");
                     System.out.println("2) Нормально");
                     System.out.println("3) Плохо");
-                    short quality = (short) Menu.readValue();
+                    short quality = (short) Menu.readValue(1);
                     quality -= 1;
                     boolean flag = false;
                     switch (id){
@@ -74,18 +64,9 @@ public class Main {
                             System.out.println("Хотите ли вы добавить информацию о сроке годности товара?");
                             System.out.println("1) Да");
                             System.out.println("2) Нет");
-                            int choice = Menu.readYesOrNot();
+                            int choice = Menu.readValue(3);
                             if (choice == 1){
-                                Calendar endDate = Calendar.getInstance();
-                                System.out.print("Введите год окончания срока годности: ");
-                                int endYear = Menu.readValue();
-                                System.out.print("Введите месяц окончания срока годности: ");
-                                int endMonth = Menu.readValue();
-                                System.out.print("Введите день окончания срока годности: ");
-                                int endDay = Menu.readValue();
-                                endDate.set(Calendar.YEAR, endYear);
-                                endDate.set(Calendar.MONTH, (endMonth - 1));
-                                endDate.set(Calendar.DATE, endDay);
+                                Calendar endDate = Menu.setDate();
                                 food = new Food(name, date, price, address, quality, endDate);
                                 Txt.writeFoodToFile(food);
                                 flag = true;
@@ -102,10 +83,10 @@ public class Main {
                             System.out.println("Хотите ли вы добавить информацию о гарантии товара?");
                             System.out.println("1) Да");
                             System.out.println("2) Нет");
-                            choice = Menu.readYesOrNot();
+                            choice = Menu.readValue(3);
                             if (choice == 1){
                                 System.out.print("Введите количество месяцев гарантии: ");
-                                int guarantee = Menu.readValue();
+                                int guarantee = Menu.readValue(1);
                                 technic = new Technic(name, date, price, address, quality, guarantee);
                                 Txt.writeTechnicToFile(technic);
                                 flag = true;
@@ -121,18 +102,9 @@ public class Main {
                             System.out.println("Хотите ли вы добавить информацию о сроке годности товара?");
                             System.out.println("1) Да");
                             System.out.println("2) Нет");
-                            choice = Menu.readYesOrNot();
+                            choice = Menu.readValue(3);
                             if (choice == 1){
-                                Calendar endDate = Calendar.getInstance();
-                                System.out.print("Введите год окончания срока годности: ");
-                                int endYear = Menu.readValue();
-                                System.out.print("Введите месяц окончания срока годности: ");
-                                int endMonth = Menu.readValue();
-                                System.out.print("Введите день окончания срока годности: ");
-                                int endDay = Menu.readValue();
-                                endDate.set(Calendar.YEAR, (endYear - 1));
-                                endDate.set(Calendar.MONTH, (endMonth - 1));
-                                endDate.set(Calendar.DATE, endDay);
+                                Calendar endDate = Menu.setDate();
                                 milk = new Milk(name, date, price, address, quality, endDate, fatContent);
                                 Txt.writeMilkToFile(milk, true);
                                 flag = true;
@@ -150,7 +122,7 @@ public class Main {
                     System.out.println("2) Одежда");
                     System.out.println("3) Техника");
                     System.out.println("4) Молоко");
-                    int pid = Menu.readId();
+                    int pid = Menu.readValue(4);
                     System.out.print("Введите название товара: ");
                     String pName = Menu.readLine();
                     if (pid == 1) {
@@ -240,7 +212,7 @@ public class Main {
                     System.out.println("2) Одежда");
                     System.out.println("3) Техника");
                     System.out.println("4) Молоко");
-                    int findid = Menu.readId();
+                    int findid = Menu.readValue(4);
                     System.out.print("Введите название товара: ");
                     String findName = Menu.readLine();
                     if (findid == 1) {
