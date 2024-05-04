@@ -1,7 +1,9 @@
+package Data;
+
 import java.util.Calendar;
 
-public class Food extends Product{
-    private static short id = 1;
+public class Milk extends Food{
+    private static short id = 4;
     private String name;
     private Calendar purchaseDate;
     private double price;
@@ -9,8 +11,10 @@ public class Food extends Product{
     private short quality;
     private String comment = "0";
     private Calendar storageLife;
+    private double fatContent;
 
-    public Food(String name, Calendar purchaseDate, double price, String address, short quality, String comment, Calendar storageLife){
+    public Milk(String name, Calendar purchaseDate, double price, String address, short quality, String comment, Calendar storageLife, double fatContent) {
+        super(name, purchaseDate, price, address, quality, comment, storageLife);
         this.name = name;
         this.purchaseDate = purchaseDate;
         this.price = price;
@@ -18,10 +22,12 @@ public class Food extends Product{
         this.quality = quality;
         this.comment = comment;
         this.storageLife = storageLife;
+        this.fatContent = fatContent;
     }
-    public Food(String name, Calendar purchaseDate, double price, String address, short quality, String comment){
+    public Milk(String name, Calendar purchaseDate, double price, String address, short quality, String comment, double fatContent) {
+        super(name, purchaseDate, price, address, quality, comment);
         Calendar altstorageLife = Calendar.getInstance();
-        altstorageLife.set(1950, 1, 1);
+        altstorageLife.set(1950, 0, 1);
         this.name = name;
         this.purchaseDate = purchaseDate;
         this.price = price;
@@ -29,26 +35,31 @@ public class Food extends Product{
         this.quality = quality;
         this.comment = comment;
         this.storageLife = altstorageLife;
+        this.fatContent = fatContent;
     }
-    public Food(String name, Calendar purchaseDate, double price, String address, short quality, Calendar storageLife){
+    public Milk(String name, Calendar purchaseDate, double price, String address, short quality, Calendar storageLife, double fatContent) {
+        super(name, purchaseDate, price, address, quality, storageLife);
         this.name = name;
         this.purchaseDate = purchaseDate;
         this.price = price;
         this.address = address;
         this.quality = quality;
         this.storageLife = storageLife;
+        this.fatContent = fatContent;
     }
-    public Food(String name, Calendar purchaseDate, double price, String address, short quality){
+    public Milk(String name, Calendar purchaseDate, double price, String address, short quality, double fatContent) {
+        super(name, purchaseDate, price, address, quality);
         Calendar altstorageLife = Calendar.getInstance();
-        altstorageLife.set(1950, 1, 1);
+        altstorageLife.set(1950, 0, 1);
         this.name = name;
         this.purchaseDate = purchaseDate;
         this.price = price;
         this.address = address;
         this.quality = quality;
         this.storageLife = altstorageLife;
+        this.fatContent = fatContent;
     }
-
+    @Override
     public short getId(){
         return id;
     }
@@ -85,5 +96,9 @@ public class Food extends Product{
 
     public Calendar getStorageLife(){
         return storageLife;
+    }
+
+    public double getFatContent() {
+        return fatContent;
     }
 }

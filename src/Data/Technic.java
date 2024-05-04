@@ -1,3 +1,5 @@
+package Data;
+
 import java.util.Calendar;
 
 public class Technic extends Product{
@@ -7,7 +9,7 @@ public class Technic extends Product{
     private double price;
     private String address;
     private short quality;
-    private String comment = "";
+    private String comment = "0";
     private int guarantee = -1;
 
     public Technic(String name, Calendar purchaseDate, double price, String address, short quality, String comment, int guarantee){

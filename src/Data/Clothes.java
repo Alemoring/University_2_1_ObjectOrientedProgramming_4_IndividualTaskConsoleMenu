@@ -1,3 +1,5 @@
+package Data;
+
 import java.util.Calendar;
 
 public class Clothes extends Product{
@@ -7,8 +9,16 @@ public class Clothes extends Product{
     private double price;
     private String address;
     private short quality;
-    private String comment = "";
+    private String comment = "0";
 
+    public Clothes(String name, Calendar purchaseDate, double price, String address, short quality, String comment){
+        this.name = name;
+        this.purchaseDate = purchaseDate;
+        this.price = price;
+        this.address = address;
+        this.quality = quality;
+        this.comment = comment;
+    }
     public Clothes(String name, Calendar purchaseDate, double price, String address, short quality){
         this.name = name;
         this.purchaseDate = purchaseDate;

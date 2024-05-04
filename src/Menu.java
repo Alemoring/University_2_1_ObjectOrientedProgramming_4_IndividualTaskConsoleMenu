@@ -1,6 +1,13 @@
+import Data.Food;
+import Data.Milk;
+import Data.Product;
+import Data.Technic;
+import Repository.Txt;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -142,7 +149,7 @@ public class Menu {
         choicetodo = readValue(2);
     }
 
-     public static void chooseFindCharacteristics(Food[] foods, Clothes[] clotheses, Technic[] technics, Milk[] milks) throws IOException { // Если выбрали 4 пункт в начале
+     public static void chooseFindCharacteristics(ArrayList<Product> products) throws IOException { // Если выбрали 4 пункт в начале
         choiceid = -1;
         do{
             System.out.println("Введите тип покупки: ");
@@ -156,10 +163,12 @@ public class Menu {
                 case 1: // Еда
                     System.out.print("Введите название товара, у которого хотите узнать срок годности: ");
                     findName = Menu.readLine();
-                    if (foods != null) {
-                        for (Food food1 : foods) {
-                            if (food1.getName().toLowerCase().contains(findName.toLowerCase())){
-                                System.out.println("У товара " + food1.getName() + ", который стоит " + food1.getPrice() + " рублей, купленного по адресу " + food1.getAddress() + ", срок годности до " + food1.getStorageLife().get(Calendar.YEAR) + " года " + (food1.getStorageLife().get(Calendar.MONTH) + 1) + " месяца " + food1.getStorageLife().get(Calendar.DATE) + " дня");
+                    if (products != null) {
+                        for (Product product : products) {
+                            if (product instanceof Food){
+                                if (product.getName().toLowerCase().contains(findName.toLowerCase())){
+                                    System.out.println("У товара " + product.getName() + ", который стоит " + product.getPrice() + " рублей, купленного по адресу " + product.getAddress() + ", срок годности до " + ((Food) product).getStorageLife().get(Calendar.YEAR) + " года " + (((Food) product).getStorageLife().get(Calendar.MONTH) + 1) + " месяца " + ((Food) product).getStorageLife().get(Calendar.DATE) + " дня");
+                                }
                             }
                         }
                     }else {
@@ -174,10 +183,12 @@ public class Menu {
                 case 3: // Техника
                     System.out.print("Введите название товара, у которого хотите узнать срок гарантии: ");
                     findName = Menu.readLine();
-                    if (technics != null) {
-                        for (Technic technic1: technics) {
-                            if (technic1.getName().toLowerCase().contains(findName.toLowerCase())){
-                                System.out.println("У товара " + technic1.getName() + ", который стоит " + technic1.getPrice() + " рублей, купленного по адресу " + technic1.getAddress() + ", " + technic1.getPurchaseDate().get(Calendar.YEAR) + " года " + (technic1.getPurchaseDate().get(Calendar.MONTH) + 1) + " месяца " + technic1.getPurchaseDate().get(Calendar.DATE) + " числа " + ", гарантия " + technic1.getGuarantee() + " месяцев");
+                    if (products != null) {
+                        for (Product product: products) {
+                            if (product instanceof Technic){
+                                if (product.getName().toLowerCase().contains(findName.toLowerCase())){
+                                    System.out.println("У товара " + product.getName() + ", который стоит " + product.getPrice() + " рублей, купленного по адресу " + product.getAddress() + ", " + product.getPurchaseDate().get(Calendar.YEAR) + " года " + (product.getPurchaseDate().get(Calendar.MONTH) + 1) + " месяца " + product.getPurchaseDate().get(Calendar.DATE) + " числа " + ", гарантия " + ((Technic) product).getGuarantee() + " месяцев");
+                                }
                             }
                         }
                     }else {
@@ -188,10 +199,12 @@ public class Menu {
                 case 4: // Молоко
                     System.out.print("Введите название товара, у которого хотите узнать срок годности: ");
                     findName = Menu.readLine();
-                    if (milks != null) {
-                        for (Milk milk1 : milks) {
-                            if (milk1.getName().toLowerCase().contains(findName.toLowerCase())){
-                                System.out.println("У товара " + milk1.getName() + ", который стоит " + milk1.getPrice() + " рублей, купленного по адресу " + milk1.getAddress() + ", срок годности до " + milk1.getStorageLife().get(Calendar.YEAR) + " года " + (milk1.getStorageLife().get(Calendar.MONTH) + 1) + " месяца " + milk1.getStorageLife().get(Calendar.DATE) + " дня");
+                    if (products != null) {
+                        for (Product product : products) {
+                            if (product instanceof Milk){
+                                if (product.getName().toLowerCase().contains(findName.toLowerCase())){
+                                    System.out.println("У товара " + product.getName() + ", который стоит " + product.getPrice() + " рублей, купленного по адресу " + product.getAddress() + ", срок годности до " + ((Milk) product).getStorageLife().get(Calendar.YEAR) + " года " + (((Milk) product).getStorageLife().get(Calendar.MONTH) + 1) + " месяца " + ((Milk) product).getStorageLife().get(Calendar.DATE) + " дня");
+                                }
                             }
                         }
                     }else {
